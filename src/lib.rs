@@ -2021,7 +2021,7 @@ impl Build {
                 //"arm64" | "aarch64" => ArchSpec::Device("arm64"),
                 "arm64" | "aarch64" => ArchSpec::Simulator("-arch arm64"),
                 "i386" | "i686" => ArchSpec::Simulator("-m32"),
-                "x86_64" => ArchSpec::Simulator("-m64 -arch x86_64"),
+                "x86_64" => ArchSpec::Simulator("-m64"),
                 _ => {
                     return Err(Error::new(
                         ErrorKind::ArchitectureInvalid,
@@ -2046,6 +2046,8 @@ impl Build {
             }
             ArchSpec::Simulator(arch) => {
                 cmd.args.push(arch.into());
+                cmd.args.push("-arch".into());
+                cmd.args.push("m64".into());
                 cmd.args
                     .push(format!("-mios-simulator-version-min={}", min_version).into());
                 "iphonesimulator"
