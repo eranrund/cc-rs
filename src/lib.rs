@@ -2021,7 +2021,7 @@ impl Build {
                 //"arm64" | "aarch64" => ArchSpec::Device("arm64"),
                 "arm64" | "aarch64" => ArchSpec::Simulator("-arch arm64"),
                 "i386" | "i686" => ArchSpec::Simulator("-m32"),
-                "x86_64" => ArchSpec::Simulator("-m64"),
+                "x86_64" => ArchSpec::Simulator("-m64 -arch x86_64"),
                 _ => {
                     return Err(Error::new(
                         ErrorKind::ArchitectureInvalid,
