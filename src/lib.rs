@@ -1609,6 +1609,7 @@ impl Build {
                 if target.contains("darwin") {
                     if let Some(arch) = map_darwin_target_from_rust_to_compiler_architecture(target)
                     {
+                        println!("cargo:warning=SETTING ARCH TO {:?}", arch);
                         cmd.args.push("-arch".into());
                         cmd.args.push(arch.into());
                     }
