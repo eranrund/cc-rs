@@ -1981,6 +1981,7 @@ impl Build {
     }
 
     fn ios_flags(&self, cmd: &mut Tool) -> Result<(), Error> {
+        #[derive(Debug)]
         enum ArchSpec {
             Device(&'static str),
             Simulator(&'static str),
