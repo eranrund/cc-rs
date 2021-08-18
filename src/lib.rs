@@ -2030,6 +2030,8 @@ impl Build {
             }
         };
 
+        self.print(&format!("SUCKS {:?} {:?}", is_catalyst, arch));
+
         let min_version =
             std::env::var("IPHONEOS_DEPLOYMENT_TARGET").unwrap_or_else(|_| "7.0".into());
 
