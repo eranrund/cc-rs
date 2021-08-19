@@ -2008,7 +2008,7 @@ impl Build {
         let is_sim = match target.split('-').nth(3) {
             Some(v) => v == "sim",
             None => false,
-        }
+        };
 
         let arch = if is_catalyst {
             match arch {
