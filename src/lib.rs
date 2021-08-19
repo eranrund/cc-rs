@@ -2005,6 +2005,11 @@ impl Build {
             None => false,
         };
 
+        let is_sim = match target.split('-').nth(3) {
+            Some(v) => v == "sim",
+            None => false,
+        }
+
         let arch = if is_catalyst {
             match arch {
                 "arm64e" => ArchSpec::Catalyst("arm64e"),
@@ -2017,13 +2022,22 @@ impl Build {
                     ));
                 }
             }
+        } else if is_sim {
+            match arch {
+                "arm64" | "aarch64" => ArchSpec::Simulator("-arch arm64"),
+                _ => {
+                    return Err(Error::new(
+                        ErrorKind::ArchitectureInvalid,
+                        "Unknown architecture for iOS simulator target.",
+                    ));
+                }
+            }
         } else {
             match arch {
                 "arm" | "armv7" | "thumbv7" => ArchSpec::Device("armv7"),
                 "armv7s" | "thumbv7s" => ArchSpec::Device("armv7s"),
                 "arm64e" => ArchSpec::Device("arm64e"),
                 "arm64" | "aarch64" => ArchSpec::Device("arm64"),
-                //"arm64" | "aarch64" => ArchSpec::Simulator("-arch arm64"),
                 "i386" | "i686" => ArchSpec::Simulator("-m32"),
                 "x86_64" => ArchSpec::Simulator("-m64"),
                 _ => {
