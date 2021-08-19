@@ -2046,8 +2046,8 @@ impl Build {
             }
             ArchSpec::Simulator(arch) => {
                 cmd.args.push(arch.into());
-                cmd.args.push("-arch".into());
-                cmd.args.push("x86_64".into());
+                //cmd.args.push("-arch".into());
+                //cmd.args.push("x86_64".into());
                 cmd.args
                     .push(format!("-mios-simulator-version-min={}", min_version).into());
                 "iphonesimulator"
